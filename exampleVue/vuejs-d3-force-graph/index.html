@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>VueJS + D3 force graph</title>
+  
+  
+  
+  
+  
+</head>
+
+<body>
+
+  <div id="app">
+  <svg xmlns="http://www.w3.org/2000/svg" 
+       :width="width+'px'"
+       :height="height+'px'"
+       @mousemove="drag($event)"
+       @mouseup="drop()"
+       v-if="bounds.minX">
+    
+    <line v-for="link in graph.links"
+          :x1="coords[link.source.index].x"
+          :y1="coords[link.source.index].y"
+          :x2="coords[link.target.index].x"
+          :y2="coords[link.target.index].y"
+          stroke="black" stroke-width="2"/>
+    
+    <circle v-for="(node, i) in graph.nodes"
+            :cx="coords[i].x"
+            :cy="coords[i].y"
+            :r="20" :fill="colors[Math.ceil(Math.sqrt(node.index))]"
+            stroke="white" stroke-width="1"
+            @mousedown="currentMove = {x: $event.screenX, y: $event.screenY, node: node}"/>
+    
+  </svg>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.2.6/vue.min.js'></script>
+<script src='https://d3js.org/d3-collection.v1.min.js'></script>
+<script src='https://d3js.org/d3-quadtree.v1.min.js'></script>
+<script src='https://d3js.org/d3-timer.v1.min.js'></script>
+<script src='https://d3js.org/d3-force.v1.min.js'></script>
+<script src='https://d3js.org/d3-array.v1.min.js'></script>
+<script src='https://d3js.org/d3-dispatch.v1.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="./vue.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
+  <meta charset="UTF-8">
+  <title>title</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <form>
+      <input type="text" ref="my_input">
+      <button @click.prevent="getFormValues()">Get values</button>
+    </form>
+
+    <ol>
+      <todo-item v-for="item in groceryList" v-bind:todo="item">
+      </todo-item>
+    </ol>
+  </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+<script>
+  Vue.component('todo-item', {
+    props: ['todo'],
+    template: '<li>{{ todo.text }}</li>'
+  })
+
+  var app7 = new Vue({
+    el: '#app',
+    data: {
+      groceryList: [{
+          text: 'Vegetables'
+        },
+        {
+          text: 'Cheese'
+        },
+        {
+          text: 'Whatever else humans are supposed to eat'
+        }
+      ]
+    },
+    methods: {
+      getFormValues() {
+        new_item = {
+          text: this.$refs.my_input.value
+        }
+        this.groceryList.push(new_item)
+      }
+    }
+  })
+</script>
+
+
