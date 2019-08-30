@@ -1,0 +1,63 @@
+<html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+
+    <div id="todo">
+        <h1>{{title}}</h1>
+        <ul>
+            <li v-for="item in items" v-bind:class="{ 'removed':
+            item.checked }">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" v-model="item.checked"> {{
+                        item.txt }}
+                    </label>
+                </div>
+            </li>
+        </ul>
+        <br>
+        <hr>
+        <em>Modify title here:</em>
+        <input v-model=title>
+        <br>
+        <em>Input new item</em>
+        <input v-model=newitem></input>
+        <button type="button" v-on:click=push_item>Add Item!</button>
+        </label>
+    </div>
+
+
+    <script>
+
+        var data = {
+            title: "Title",
+            items: [
+                { txt: "item1", checked: false },
+                { txt: "item2", checked: false },
+                { txt: "item3", checked: true }
+            ],
+            newitem: null
+        }
+
+
+        new Vue({
+            el: "#todo",
+            data: data,
+            methods: {
+                push_item: function () {
+                    if (this.newitem != null) {
+                        var entry = { txt: this.newitem.trim(), checked: false }
+                        this.items.push(entry)
+                        this.newitem = null
+                    }
+                }
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>

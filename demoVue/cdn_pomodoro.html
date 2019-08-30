@@ -1,0 +1,71 @@
+<html>
+
+<!--COMPONENT DOES NOT WORK-->
+
+<!--create a very simple time counter that 
+        will decrement untill the end of the 
+        working interval and then restart and 
+        decrement till the end of the resting 
+        time and so on.
+    -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<body>
+
+    <div id='app'>
+        <h1>Pomodoro Timer</h1>
+
+        <div>
+            <strong>Working Time remaining: {{work.time}}</strong>
+            <em v-show='work.time==0'>STOP!</em>
+        </div>
+        <div>
+            <strong>Resting Time remaining: {{rest.time}}</strong>
+            <em v-show='rest.time==0'>STOP!</em>
+        </div>
+        <br>
+        <hr>
+        <em>Enter amount of time to work (sec): </em>
+        <input v-model="work_input">
+        <p>
+            <em>Enter amount of time to rest (sec): </em>
+            <input v-model="rest_input">
+        </p>
+        <button type="button" v-on:click="startTimer">Start!</button>
+    </div>
+
+
+
+    <script>
+        var defaulttime = { worktime: 15, resttime: 5 }
+        var data = {
+            work: { time: defaulttime.worktime, stop: false },
+            rest: { time: defaulttime.resttime, stop: false },
+            work_input: null,
+            rest_input: null
+        }
+
+        new Vue({
+            el: '#app',
+            data: data,
+            methods: {
+                startTimer: function(){
+                    if(this.work_input!=null){this.work.time = this.work_input}
+                    if(this.rest_input!=null){this.rest.time = this.rest_input}
+                    while(this.work.time > 0){
+                    setInterval(
+                        function(){this.work.time = this.work.time - 1}, 
+                        1000)
+                    }
+                }
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>
